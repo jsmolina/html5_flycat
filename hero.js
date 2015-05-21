@@ -17,18 +17,18 @@ var Hero = function (ctx, jumpsX, jumpsY) {
         spriteImg.onload = this.loadSprite;
 
         spriteFight.src = "images/fight.png";
-    }
+    };
 
     this.getPosX = function() {
         return heroPosX;
-    }
+    };
     this.getPosY = function() {
         return heroPosY;
-    }
+    };
     
     this.score = function (p) {
         points += p;
-    }
+    };
 
     this.fight = function () {
         if (!fight) {
@@ -36,15 +36,15 @@ var Hero = function (ctx, jumpsX, jumpsY) {
             lives = lives - 1;
         }
         fight = true;        
-    }
+    };
 
     this.getScore = function() {
         return points;
-    }
+    };
 
     this.getLives = function() {
         return lives;
-    }
+    };
 
     this.render = function(counter) {
         if (spriteLoaded) {
@@ -58,7 +58,7 @@ var Hero = function (ctx, jumpsX, jumpsY) {
                 ctx.drawImage(spriteFight, 64 * counter, 0, 64, 64, heroPosX * jumpsX, heroPosY * jumpsY, 64, 64);
             }
         }
-    }
+    };
 
     this.loadSprite = function () {
         spriteLoaded = true;
@@ -71,7 +71,7 @@ var Hero = function (ctx, jumpsX, jumpsY) {
         if (fight) {
             return;
         }
-        heroPosX -= 1;
+        heroPosX -= 0.5;
 
         if (heroPosX < 0) {
             heroPosX = 0;
@@ -82,7 +82,7 @@ var Hero = function (ctx, jumpsX, jumpsY) {
         if (fight) {
             return;
         }
-        heroPosX += 1;
+        heroPosX += 0.5;
 
         if (heroPosX > 40) {
             heroPosX = 40;
@@ -93,7 +93,7 @@ var Hero = function (ctx, jumpsX, jumpsY) {
         if (fight) {
             return;
         }
-        heroPosY -= 1;
+        heroPosY -= 0.25;
 
         if (heroPosY < 0) {
             heroPosY = 0;
@@ -104,10 +104,11 @@ var Hero = function (ctx, jumpsX, jumpsY) {
         if (fight) {
             return;
         }
-        heroPosY += 1;
+        heroPosY += 0.25;
 
-        if (heroPosY > 10) {
-            heroPosY = 10;
+        if (heroPosY > 8) {
+            heroPosY = 8;
         }
     };
-}
+};
+
