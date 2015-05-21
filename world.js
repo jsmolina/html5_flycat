@@ -11,7 +11,7 @@ var World = function (idCanvas) {
     var scrollVal = 0;
     var speed = 2;
     var rtl_counter = 0;
-    var pill_counter = 5;
+    var pill_counter = 10;
     var counter = 0;
     var jumpsX = 0;
     var jumpsY = 0;
@@ -28,13 +28,16 @@ var World = function (idCanvas) {
         ctx = this.loadCanvas(idCanvas);
         scrollImg.src = "images/sky1.png";
         scrollImg.onload = this.loadImage;
+        var p = null;
+        var pill = null;
         pillFactory = new PillFactory(ctx, jumpsX, jumpsY);
         for (i = 0; i < pill_counter; i++) {
-            var pill = pillFactory.giveMeOne();            
+            pill = Pill();
+            pill = pillFactory.giveMeOne(pill);
             pills.push(pill);
         }
         this.countMove();
-    }
+    };
 
     this.loadCanvas = function (idCanvas) {
         var elemento = document.getElementById(idCanvas);
@@ -76,7 +79,7 @@ var World = function (idCanvas) {
         setTimeout(function () {
             inst.countMove();
         }, 50);
-    }
+    };
 
 
     this.render = function() {
@@ -102,7 +105,7 @@ var World = function (idCanvas) {
             var pill = pills[i];
             // if arrived to zero, then generate another one
             if(!pill.render(time, hero)) {
-                pills[i] = pillFactory.giveMeOne();
+                pills[i] = pillFactory.regenerate(pill);
             }
         }
 
@@ -111,7 +114,7 @@ var World = function (idCanvas) {
 
         setTimeout(function () {
             inst.render();
-        }, 150);
+        }, 60);
     };
 
     /**
@@ -122,6 +125,8 @@ var World = function (idCanvas) {
      */
     this.drawText = function (text, originX, originY) {
         ctx.font = '0.9em courier';
+        ctx.strokeStyle = "#FFFFFF";
+
         var xPosition = originX;
         var yPosition = originY;
         // relative or absolute?
@@ -131,7 +136,8 @@ var World = function (idCanvas) {
         }
         ctx.strokeText(text, xPosition, yPosition);
         ctx.textBaseline = 'bottom';
-    }
+    };
+
 
     this.keyDown = function (event) {
         event = event || window.event;
@@ -148,6 +154,7 @@ var World = function (idCanvas) {
         } else if (e == 39 /*right*/) {
             hero.heroRight();
         }
+        return false;
     }
 
 }
