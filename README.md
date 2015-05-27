@@ -1,7 +1,7 @@
 html5_flycat
 ============
 
-Flying cat chasing rats and fishes, with enemies like dogs.
+Flying cat chasing rats and fishes, with enemies like dogs written without helper libraries.
 
 *Game on development*
 
